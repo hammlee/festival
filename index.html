@@ -3,42 +3,91 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>설문 조사222</title>
+    <title>제 1회 샌드뱅크 코딩문학 페스티벌</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>설문 조사</h1>
-    <form id="surveyForm">
-      <label for="name">이름:</label>
-      <input type="text" id="name" name="name" /><br /><br />
-
-      <label for="age">나이:</label>
-      <input type="number" id="age" name="age" /><br /><br />
-
-      <label for="question1">질문 1:</label>
-      <input type="text" id="question1" name="question1" /><br /><br />
-
-      <label for="question2">질문 2:</label>
-      <input type="text" id="question2" name="question2" /><br /><br />
-
-      <input type="submit" value="제출" />
-    </form>
-
-    <script src="https://script.google.com/macros/s/AKfycbz8jCWwsrVdtGhQIq0dm0UScShMdC-Nc-NKg62VJ_kw4v5XI-84HEweYV9xyd2m-UmShg/exec"></script>
-    <script>
-      document
-        .getElementById("surveyForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          var formData = new FormData(this);
-          var formDataObj = Object.fromEntries(formData.entries());
-          saveFormData(formDataObj);
-          this.reset();
-        });
-
-      function saveFormData(data) {
-        google.script.run.appendData(data);
-      }
-    </script>
-    ~
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="event-card">
+          <p class="event-card-description">
+            "개발자, 비개발자이기 전에 우리 모두는 문학가였다"
+          </p>
+          <h5 class="event-card-title">제 1회 샌드뱅크 개발문학 과거시험 📖</h5>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="event-card">
+          <p class="event-card-description">
+            🎍 주제: 개발, 코드, 인생, 사랑, 우주, 그리고 모든 것
+          </p>
+          <p class="event-card-description">
+            📅 기한: 2023년 5월 26일(금) 23:59:59
+          </p>
+          <p class="event-card-description">
+            💰 상금: 0.1 ETH(1등), 50 USDT(2등), 20 USDT(3등)
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">참여하기 🙋</h5>
+              <form
+                action="https://script.google.com/a/macros/sandbank.io/s/AKfycbyLctUvBmRefeNfjGLqqmahsSgGHsWDnBfOc6SK514_xpl-b7QQeubgVFdNCKGbfu2ZyA/exec"
+                method="post"
+              >
+                <div class="form-group">
+                  <label for="name">이름</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">이메일 주소</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="text">Show your code</label>
+                  <textarea
+                    class="form-control"
+                    id="text"
+                    name="text"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                  제출
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center logo-container">
+        <span class="powered-by">powered by</span>
+        <img src="white.png" alt="회사 로고" class="logo" width="160" />
+        <span class="powered-by2">&</span>
+        <img src="gpt.png" alt="회사 로고" class="logo" width="160" />
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   </body>
 </html>
