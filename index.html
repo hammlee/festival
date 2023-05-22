@@ -48,8 +48,9 @@
               🎍 주제: 개발, 코드, 인생, 사랑, 우주, 그리고 모든 것
             </p>
             <p class="event-card-description">
-              📅 기한: 2023년 5월 26일(금) 23:59:59
+              📅 기한: 2023년 5월 28일(일) 23:59:59
             </p>
+            <p id="countdown" class="event-card-description"></p>
             <p class="event-card-description">
               💰 상금: 0.06 ETH(1등), 50 USDT(2등), 20 USDT(3등)
             </p>
@@ -62,7 +63,7 @@
             <div class="card-body">
               <h5 class="card-title">참여하기 🙋</h5>
               <form
-                action="https://script.google.com/macros/s/AKfycby_tkYltfguI2xiEWj60V-iX7eiytVhvrFw-pvupqcQ3nBKky1puMv6CiaTbPBJ2w3hYA/exec"
+                action="https://script.google.com/macros/s/AKfycbxNsyC-EsyFb4qEA5hSdv_2wl8qCLNrcIGr0m5vaBdOLY9ytSnt9kdBT7Mzh1-AGsUFYQ/exec?function=doPost"
                 method="post"
               >
                 <div class="form-group">
@@ -103,6 +104,14 @@
           </div>
         </div>
       </div>
+      <div class="row justify-content-center review">
+        <div class="col-md-8">
+          <div class="event-card">
+            <h5 class="event-card-title">지금까지 제출한 명문들 📝</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-container row"></div>
       <div class="row justify-content-center logo-container">
         <span class="powered-by">powered by</span>
         <img src="white.png" alt="회사 로고" class="logo" />
@@ -110,5 +119,94 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.getJSON(
+          "https://script.google.com/macros/s/AKfycbxNsyC-EsyFb4qEA5hSdv_2wl8qCLNrcIGr0m5vaBdOLY9ytSnt9kdBT7Mzh1-AGsUFYQ/exec?function=doGet",
+          function (data) {
+            // JSON 데이터를 처리하는 코드 작성
+            console.log(data); // 예시로 데이터를 콘솔에 출력
+
+            // 데이터를 기반으로 카드 생성
+            var cardContainer = $(".card-container"); // 카드 컨테이너 선택
+
+            for (var i = data.length - 1; i >= 0; i--) {
+              var item = data[i];
+              var cardText = item.text
+                ? item.text.replace(/\r\n/g, "<br>")
+                : "";
+
+              var card = `
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">${item.name}</h5>
+          <p class="card-text">${cardText}</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+              cardContainer.append(card); // prepend 메서드를 사용하여 역순으로 카드 추가
+            }
+          }
+        );
+      });
+    </script>
+    <script>
+      // 특정 시간 설정 (예: 2023년 5월 31일 12시 0분 0초)
+      var targetDate = new Date("2023-05-28T23:59:59");
+
+      function updateCountdown() {
+        var now = new Date();
+        var timeDiff = targetDate - now;
+
+        // 시간, 분, 초 계산
+        var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(
+          (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        // 결과를 HTML 엘리먼트에 업데이트
+        var countdownElement = document.getElementById("countdown");
+        countdownElement.innerHTML =
+          "- 🕓 " +
+          days +
+          "일 " +
+          hours +
+          "시간 " +
+          minutes +
+          "분 " +
+          seconds +
+          "초 -";
+      }
+
+      // 일정한 간격으로 시간 업데이트
+      setInterval(updateCountdown, 1000);
+    </script>
+    <script>
+      // 폼 제출 시 이벤트 핸들러
+      $("form").submit(function (event) {
+        event.preventDefault(); // 폼 제출 동작 중지
+
+        // 서버로 데이터 전송
+        $.ajax({
+          url: "https://script.google.com/macros/s/AKfycbxNsyC-EsyFb4qEA5hSdv_2wl8qCLNrcIGr0m5vaBdOLY9ytSnt9kdBT7Mzh1-AGsUFYQ/exec?function=doPost",
+          method: "POST",
+          data: $("form").serialize(),
+          success: function (response) {
+            // 성공적으로 응답을 받은 경우
+            alert("제출이 완료되었습니다."); // 팝업 메시지 표시
+            location.reload(); // 페이지 리프레시
+          },
+          error: function (error) {
+            // 오류 발생 시
+            alert("제출에 실패했습니다. 다시 시도해주세요.");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
