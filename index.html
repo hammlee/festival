@@ -36,7 +36,7 @@
               "개발자, 비개발자 전에 우리 모두는 문학가였다"
             </p>
             <h5 class="event-card-title">
-              제1회 샌드뱅크 개발문학 과거시험 📖
+              제1회 샌드뱅크 개발문학 페스티벌 📖
             </h5>
           </div>
         </div>
@@ -107,7 +107,7 @@
       <div class="row justify-content-center review">
         <div class="col-md-8">
           <div class="event-card">
-            <h5 class="event-card-title">지금까지 제출한 명문들 📝</h5>
+            <h5 class="event-card-title">지금까지 제출한 작품들 📝</h5>
           </div>
         </div>
       </div>
@@ -121,14 +121,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script>
       $(document).ready(function () {
+        var cardContainer = $(".card-container");
+        cardContainer.html(
+          '<div class="loading-text">작품을 불러오고 있습니다...</div>'
+        );
+
         $.getJSON(
           "https://script.google.com/macros/s/AKfycbxNsyC-EsyFb4qEA5hSdv_2wl8qCLNrcIGr0m5vaBdOLY9ytSnt9kdBT7Mzh1-AGsUFYQ/exec?function=doGet",
           function (data) {
-            // JSON 데이터를 처리하는 코드 작성
-            console.log(data); // 예시로 데이터를 콘솔에 출력
-
-            // 데이터를 기반으로 카드 생성
-            var cardContainer = $(".card-container"); // 카드 컨테이너 선택
+            cardContainer.empty(); // 이전 카드 삭제
 
             for (var i = data.length - 1; i >= 0; i--) {
               var item = data[i];

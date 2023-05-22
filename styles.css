@@ -91,3 +91,9 @@ body {
 .review {
   margin-top: 20px;
 }
+.loading-text {
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
