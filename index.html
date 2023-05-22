@@ -11,6 +11,21 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      @media (max-width: 767px) {
+        /* 모바일 화면에서만 적용되는 스타일 */
+        .event-card {
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+        .event-card-description {
+          font-size: 14px;
+        }
+        .event-card-title {
+          font-size: 23px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -18,10 +33,10 @@
         <div class="col-md-8">
           <div class="event-card">
             <p class="event-card-description">
-              "개발자, 비개발자이기 전에 우리 모두는 문학가였다"
+              "개발자, 비개발자 전에 우리 모두는 문학가였다"
             </p>
             <h5 class="event-card-title">
-              제 1회 샌드뱅크 개발문학 과거시험 📖
+              제1회 샌드뱅크 개발문학 과거시험 📖
             </h5>
           </div>
         </div>
@@ -90,9 +105,7 @@
       </div>
       <div class="row justify-content-center logo-container">
         <span class="powered-by">powered by</span>
-        <img src="white.png" alt="회사 로고" class="logo" width="160" />
-        <span class="powered-by2">&</span>
-        <img src="gpt.png" alt="회사 로고" class="logo" width="160" />
+        <img src="white.png" alt="회사 로고" class="logo" />
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

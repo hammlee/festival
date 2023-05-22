@@ -1,5 +1,4 @@
 /** @format */
-
 body {
   background-color: black;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -74,4 +73,7 @@ body {
 .powered-by2 {
   color: #fff;
   margin: 0px 10px;
+}
+.logo {
+  width: 160px;
 }
