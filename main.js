@@ -1,10 +1,12 @@
 /** @format */
 
 // 작품 불러오기
+// JavaScript
+// JavaScript
 $(document).ready(function () {
-  var cardContainer = $(".card-container");
+  var cardContainer = $(".swiper-wrapper");
   cardContainer.html(
-    '<div class="loading-text"><i class="fas fa-spinner fa-spin"></i> 작품을 불러오는 중...</div>'
+    '<div class="loading-text text-center"><i class="fas fa-spinner fa-spin"></i> 작품을 불러오는 중...</div>'
   );
 
   $.getJSON(
@@ -14,44 +16,32 @@ $(document).ready(function () {
       var totalCount = String(data.length + 1) + "건";
       $("#content-count").text(totalCount);
 
-      // likeCount > 0과 likeCount = 0인 데이터를 분리
       var dataWithLikes = data.filter((item) => item.likeCount > 0);
-      var dataWithoutLikes = data.filter((item) => item.likeCount == 0);
+      var dataWithoutLikes = data;
 
-      // 각각의 배열을 필요한 방식으로 정렬
-      dataWithLikes.sort(function (a, b) {
-        return b.likeCount - a.likeCount;
-      });
-
-      dataWithoutLikes.sort(function (a, b) {
-        return b.id - a.id;
-      });
-
-      // 두 배열을 다시 합치기
-      data = dataWithLikes.concat(dataWithoutLikes);
+      dataWithLikes.sort((a, b) => b.likeCount - a.likeCount);
+      dataWithoutLikes.sort((a, b) => b.id - a.id);
 
       var rank = 1;
       var previousLikeCount = -1;
       var count = 0;
 
-      for (var i = 0; i < data.length; i++) {
-        var item = data[i];
+      dataWithLikes.forEach((item) => {
         var cardText = item.text ? item.text.replace(/\r\n/g, "<br>") : "";
         var cardRank = "";
 
-        if (item.likeCount > 0) {
-          if (item.likeCount == previousLikeCount) {
-            count++;
-          } else {
-            rank += count;
-            count = 1;
-          }
-          cardRank = "현재 " + rank + "위";
-          previousLikeCount = item.likeCount;
+        if (item.likeCount === previousLikeCount) {
+          count++;
+        } else {
+          rank += count;
+          count = 1;
         }
 
+        cardRank = "현재 " + rank + "위";
+        previousLikeCount = item.likeCount;
+
         var card = `
-          <div class="col-md-6 col-lg-6 mb-3">
+          <div class="swiper-slide">
             <div class="card card-black">
               <div class="card-badge">${item.id}</div>
               ${cardRank ? `<div class="card-rank">${cardRank}</div>` : ""}
@@ -59,12 +49,12 @@ $(document).ready(function () {
                 <p class="card-text">${cardText}</p>
               </div>
               <div class="card-footer">
-                <button class="btn btn-light btn-sm recommend-button">
+                <div>
                   <span class="icon-wrapper">
                     <i class="fas fa-thumbs-up"></i>
                   </span>
                   <span class="like-count">${item.likeCount}</span>
-                </button>
+                </div>
                 <h5 class="card-name">from <span class="card-name-from">${
                   item.name
                 }</span></h5>
@@ -74,7 +64,43 @@ $(document).ready(function () {
         `;
 
         cardContainer.append(card);
-      }
+      });
+
+      dataWithoutLikes.forEach((item) => {
+        var cardText = item.text ? item.text.replace(/\r\n/g, "<br>") : "";
+
+        var card = `
+          <div class="card card-black col-md-6 mb-4">
+            <div class="card-badge">${item.id}</div>
+            <div class="card-body">
+              <p class="card-text">${cardText}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-light btn-sm recommend-button">
+                <span class="icon-wrapper">
+                  <i class="fas fa-thumbs-up"></i>
+                </span>
+                <span class="like-count">${item.likeCount}</span>
+              </button>
+              <h5 class="card-name">from <span class="card-name-from">${item.name}</span></h5>
+            </div>
+          </div>
+        `;
+
+        $(".card-container").append(card);
+      });
+
+      var swiper = new Swiper(".swiper-container", {
+        direction: "horizontal",
+        // loop: true,
+        slidesPerView: 2,
+        spaceBetween: 10,
+        autoplay: {
+          delay: 0, // 슬라이드 간격 (밀리초)
+          disableOnInteraction: true // 사용자 상호작용 시 중지 여부
+        },
+        speed: 10000
+      });
     }
   );
 });

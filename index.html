@@ -11,6 +11,11 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -43,11 +48,21 @@
           </div>
         </div>
       </div>
+      <div class="row justify-content-center review">
+        <div class="col-md-8">
+          <div class="event-card">
+            <h5 class="event-card-title">현재 순위권 🏅</h5>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+      </div>
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">참여하기 🙋</h5>
+              <h5 class="card-title">지금 바로 참여하기 🙋</h5>
               <form
                 action="https://script.google.com/macros/s/AKfycbwk7OzL0yQuNh0Y7LR1gUvcfVvN7Kn7czh8uqH4qjFwqm5DOFCS4glAKskvNuQuCcZxIg/exec?function=doPost"
                 method="post"
@@ -110,6 +125,7 @@
       src="https://kit.fontawesome.com/7493b4a30b.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
