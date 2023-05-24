@@ -1,14 +1,16 @@
 /** @format */
+
 body {
   background-color: black;
   background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.75),
-      rgba(0, 0, 0, 0.6)
+      to right,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
     ),
     url("bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .card {
@@ -21,6 +23,7 @@ body {
 .card-black {
   background-color: #000;
   color: #eee;
+  min-height: 250px;
 }
 
 .card-title {
@@ -30,13 +33,15 @@ body {
   text-align: center;
   color: rgb(1, 124, 255);
 }
-.card-divider {
+
+.card-footer {
   margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .card-name {
   color: gray;
   font-size: 16px;
@@ -86,17 +91,21 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .powered-by {
   color: #fff;
   margin-right: 10px;
 }
+
 .powered-by2 {
   color: #fff;
   margin: 0px 10px;
 }
+
 .logo {
   width: 160px;
 }
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -111,16 +120,19 @@ body {
 .review {
   margin-top: 20px;
 }
+
 .loading-text {
   font-size: 30px;
   color: white;
   text-align: center;
   padding: 20px;
 }
+
 #content-count {
   color: #fff;
   font-size: 36px;
 }
+
 .btn-light {
   background-color: transparent;
   border-color: transparent;
@@ -134,12 +146,28 @@ body {
   background-color: transparent;
   border-color: transparent;
 }
+
 .icon-wrapper {
   color: #fff;
 }
+
 .icon-wrapper:hover {
-  color: blue; /* 아이콘의 hover 스타일 색상을 변경하려면 원하는 색상값으로 설정합니다 */
+  color: blue;
 }
+
 .like-count {
   color: #fff;
+}
+
+@media (max-width: 767px) {
+  .event-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .event-card-description {
+    font-size: 14px;
+  }
+  .event-card-title {
+    font-size: 23px;
+  }
 }

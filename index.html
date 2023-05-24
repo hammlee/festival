@@ -1,6 +1,7 @@
 <!-- @format -->
 
-<html>
+<!DOCTYPE html>
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,21 +12,6 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-      @media (max-width: 767px) {
-        /* 모바일 화면에서만 적용되는 스타일 */
-        .event-card {
-          padding-left: 0px;
-          padding-right: 0px;
-        }
-        .event-card-description {
-          font-size: 14px;
-        }
-        .event-card-title {
-          font-size: 23px;
-        }
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -63,7 +49,7 @@
             <div class="card-body">
               <h5 class="card-title">참여하기 🙋</h5>
               <form
-                action="https://script.google.com/macros/s/AKfycbz0zsc8TFWpH2vcs-fLF4btBbCeiq---CyUdtl8d13vVI4_3rQonmtIcxZgD5XIfk_nXQ/exec?function=doPost"
+                action="https://script.google.com/macros/s/AKfycbwk7OzL0yQuNh0Y7LR1gUvcfVvN7Kn7czh8uqH4qjFwqm5DOFCS4glAKskvNuQuCcZxIg/exec?function=doPost"
                 method="post"
               >
                 <div class="form-group">
@@ -87,7 +73,7 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="text">Show your code</label>
+                  <label for="text">Show your writing</label>
                   <textarea
                     class="form-control"
                     id="text"
@@ -124,118 +110,6 @@
       src="https://kit.fontawesome.com/7493b4a30b.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-      $(document).ready(function () {
-        var cardContainer = $(".card-container");
-        cardContainer.html(
-          '<div class="loading-text">작품을 불러오고 있습니다...</div>'
-        );
-
-        $.getJSON(
-          "https://script.google.com/macros/s/AKfycbz0zsc8TFWpH2vcs-fLF4btBbCeiq---CyUdtl8d13vVI4_3rQonmtIcxZgD5XIfk_nXQ/exec?function=doGet",
-          function (data) {
-            cardContainer.empty(); // 이전 카드 삭제
-            var totalCount = String(data.length + 1) + "건";
-            $("#content-count").text(totalCount);
-
-            for (var i = data.length - 1; i >= 0; i--) {
-              var item = data[i];
-              var cardText = item.text
-                ? item.text.replace(/\r\n/g, "<br>")
-                : "";
-
-              var card = `
-                <div class="col-md-6 col-lg-4 mb-3">
-                  <div class="card card-black">
-                    <div class="card-body">
-                      <p class="card-text">${cardText}</p>
-                      <div class="card-divider">
-                        <button class="btn btn-light btn-sm recommend-button">
-                          <span class="icon-wrapper">
-                            <i class="fas fa-thumbs-up"></i>
-                          </span>
-                          <span class="like-count">${item.likeCount}</span>
-                        </button>
-                        <h5 class="card-name">from<span class="card-name-from">${item.name}</span></h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;
-
-              cardContainer.append(card); // prepend 메서드를 사용하여 역순으로 카드 추가
-            }
-          }
-        );
-      });
-    </script>
-    <script>
-      // 특정 시간 설정 (예: 2023년 5월 31일 12시 0분 0초)
-      var targetDate = new Date("2023-05-28T23:59:59");
-
-      function updateCountdown() {
-        var now = new Date();
-        var timeDiff = targetDate - now;
-
-        // 시간, 분, 초 계산
-        var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor(
-          (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-        // 결과를 HTML 엘리먼트에 업데이트
-        var countdownElement = document.getElementById("countdown");
-        countdownElement.innerHTML =
-          "- 🕓 " +
-          days +
-          "일 " +
-          hours +
-          "시간 " +
-          minutes +
-          "분 " +
-          seconds +
-          "초 -";
-      }
-
-      // 일정한 간격으로 시간 업데이트
-      setInterval(updateCountdown, 1000);
-    </script>
-    <script>
-      // 폼 제출 시 이벤트 핸들러
-      $("form").submit(function (event) {
-        event.preventDefault(); // 폼 제출 동작 중지
-        // 서버로 데이터 전송
-        $.ajax({
-          url: "https://script.google.com/macros/s/AKfycbz0zsc8TFWpH2vcs-fLF4btBbCeiq---CyUdtl8d13vVI4_3rQonmtIcxZgD5XIfk_nXQ/exec?function=doPost",
-          method: "POST",
-          data: $("form").serialize(),
-          success: function (response) {
-            // 성공적으로 응답을 받은 경우
-            alert("제출이 완료되었습니다."); // 팝업 메시지 표시
-            location.reload(); // 페이지 리프레시
-          },
-          error: function (error) {
-            // 오류 발생 시
-            alert("제출에 실패했습니다. 다시 시도해주세요.");
-          }
-        });
-      });
-      // JavaScript 코드의 $(document).ready(function() {...}) 블록 안에 다음 코드를 추가합니다.
-      $(document).on("click", ".recommend-button", function () {
-        var cardName = $(this)
-          .closest(".card-divider")
-          .find(".card-name-from")
-          .text();
-
-        alert(
-          cardName +
-            "님의 작품을 추천하셨습니다. (좋아요 카운트는 아직 구현중..)"
-        );
-        var selectedButton = $(this);
-        selectedButton.removeClass("selected"); // 추천 버튼에서 "selected" 클래스를 제거합니다.
-      });
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
