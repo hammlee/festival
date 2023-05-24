@@ -1,19 +1,48 @@
 /** @format */
 
+// 남은 시간 보여주기
+function updateCountdown() {
+  var targetDate = new Date("2023-05-28T23:59:59");
+  var now = new Date();
+  var timeDiff = targetDate - now;
+
+  var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+  var countdownElement = $("#countdown");
+  countdownElement.html(
+    "(" + days + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초 ⏰)"
+  );
+}
+
+setInterval(updateCountdown, 1000);
+
+// 모바일 기기에서 접속한지 여부를 화면 사이즈로 확인하는 함수
+function isMobileDevice() {
+  const mobileWidthThreshold = 600; // 모바일 기기로 간주할 최대 너비
+
+  return window.innerWidth < mobileWidthThreshold;
+}
+
 // 작품 불러오기
-// JavaScript
-// JavaScript
 $(document).ready(function () {
   var cardContainer = $(".swiper-wrapper");
+  var cardContainer2 = $(".swiper-wrapper2");
   cardContainer.html(
-    '<div class="loading-text text-center"><i class="fas fa-spinner fa-spin"></i> 작품을 불러오는 중...</div>'
+    '<div class="loading-text text-center"><i class="fas fa-spinner fa-spin"></i> 불러오는 중...</div>'
+  );
+  cardContainer2.html(
+    '<div class="loading-text text-center"><i class="fas fa-spinner fa-spin"></i> 불러오는 중...</div>'
   );
 
   $.getJSON(
     "https://script.google.com/macros/s/AKfycbyMEu2h2AN7ob9oISsmDJuUBbwsB2AnwKhQpR9lJ8vBtvS3NNIXEtRrY41QEHjc4SDL_w/exec?function=doGet",
     function (data) {
       cardContainer.empty();
-      var totalCount = String(data.length + 1) + "건";
+      cardContainer2.empty();
+      var totalCount = "전체 " + String(data.length + 1) + "건";
       $("#content-count").text(totalCount);
 
       var dataWithLikes = data.filter((item) => item.likeCount > 0);
@@ -64,6 +93,7 @@ $(document).ready(function () {
         `;
 
         cardContainer.append(card);
+        cardContainer2.append(card);
       });
 
       dataWithoutLikes.forEach((item) => {
@@ -99,7 +129,13 @@ $(document).ready(function () {
           delay: 0, // 슬라이드 간격 (밀리초)
           disableOnInteraction: true // 사용자 상호작용 시 중지 여부
         },
-        speed: 10000
+        speed: 12000
+      });
+
+      var swiper2 = new Swiper(".swiper-container2", {
+        direction: "horizontal",
+        slidesPerView: 1,
+        spaceBetween: 10
       });
     }
   );
@@ -137,10 +173,6 @@ $("form").submit(function (event) {
     url: "https://script.google.com/macros/s/AKfycbyMEu2h2AN7ob9oISsmDJuUBbwsB2AnwKhQpR9lJ8vBtvS3NNIXEtRrY41QEHjc4SDL_w/exec?function=doPost",
     method: "POST",
     data: $("form").serialize(),
-    // data: {
-    //   functionName: "addArticle",
-    //   ...$("form").serialize()
-    // },
     success: function (response) {
       alert("제출이 완료되었습니다.");
       location.reload();
@@ -150,30 +182,3 @@ $("form").submit(function (event) {
     }
   });
 });
-
-// 남은 시간 보여주기
-function updateCountdown() {
-  var targetDate = new Date("2023-05-28T23:59:59");
-  var now = new Date();
-  var timeDiff = targetDate - now;
-
-  var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-  var countdownElement = $("#countdown");
-  countdownElement.html(
-    "- 🕓 " +
-      days +
-      "일 " +
-      hours +
-      "시간 " +
-      minutes +
-      "분 " +
-      seconds +
-      "초 -"
-  );
-}
-
-setInterval(updateCountdown, 1000);

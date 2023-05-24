@@ -23,6 +23,8 @@ body {
 }
 
 .card-black {
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: #000;
   color: #eee;
   min-height: 250px;
@@ -135,11 +137,6 @@ body {
   justify-content: center;
 }
 
-.card-container .col-md-4 {
-  /* margin: 10px; */
-  width: calc(33.33% - 20px);
-}
-
 .review {
   margin-top: 20px;
 }
@@ -175,7 +172,7 @@ body {
   color: #fff;
 }
 
-.icon-wrapper:hover {
+button .icon-wrapper:hover {
   color: blue;
 }
 
@@ -183,13 +180,14 @@ body {
   color: #fff;
 }
 
-.swiper-container {
-  text-align: center;
-}
-
 .swiper-wrapper {
-  text-align: center;
   transition-timing-function: linear;
+}
+.desktop {
+  display: block;
+}
+.mobile {
+  display: none;
 }
 
 @media (max-width: 767px) {
@@ -202,5 +200,11 @@ body {
   }
   .event-card-title {
     font-size: 23px;
+  }
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
   }
 }
