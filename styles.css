@@ -1,7 +1,7 @@
 /** @format */
 
 body {
-  background-color: black;
+  background: #000;
   background-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.5),
@@ -13,7 +13,6 @@ body {
   background-attachment: fixed;
   overflow-x: hidden;
 }
-
 .card {
   margin: 20px auto;
   max-width: 500px;
@@ -21,22 +20,18 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
 }
-
 .card-black {
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: #000;
+  margin: 10px;
+  background: #000;
   color: #eee;
   min-height: 250px;
 }
-
 .card-badge {
   color: #000;
 }
-
 .card-rank {
   background-image: linear-gradient(to bottom, #f44336, #ff7961);
-  color: #ffffff;
+  color: #fff;
   padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
@@ -46,19 +41,16 @@ body {
   top: -10px;
   left: -5px;
 }
-
 .card-title {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
   color: rgb(1, 124, 255);
 }
-
 .card-body {
   padding-top: 40px;
 }
-
 .card-footer {
   margin-top: 30px;
   display: flex;
@@ -66,120 +58,89 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
 .card-name {
   color: gray;
   font-size: 16px;
 }
-
 .form-group label {
-  font-weight: bold;
+  font-weight: 700;
 }
-
 .btn-primary {
   background-color: rgb(1, 124, 255);
   border-color: rgb(1, 124, 255);
 }
-
 .btn-primary:hover {
   background-color: #0069d9;
   border-color: #0062cc;
 }
-
 .event-card {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
-
 .event-card-content {
   margin-top: 30px;
 }
-
 .event-card-title {
   font-size: 40px;
-  font-weight: bolder;
+  font-weight: 700;
   color: rgb(1, 124, 255);
   margin-bottom: 10px;
 }
-
-.event-card-description {
+.event-card-description,
+.powered-by,
+.like-count {
   font-size: 16px;
   color: #fff;
 }
-
 .logo-container {
   margin: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
-
-.powered-by {
-  color: #fff;
-  margin-right: 10px;
-}
-
-.powered-by2 {
-  color: #fff;
-  margin: 0px 10px;
-}
-
 .logo {
-  width: 160px;
+  height: 25px;
 }
-
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
+.card-container .swiper-slide {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
 .review {
   margin-top: 20px;
 }
-
 .loading-text {
   font-size: 30px;
-  color: white;
+  color: #fff;
   text-align: center;
   padding: 20px;
   margin: 0 auto;
 }
-
 #content-count {
   color: #fff;
   font-size: 36px;
 }
-
 .btn-light {
   background-color: transparent;
   border-color: transparent;
 }
-
 .text-white {
-  color: #ffffff;
+  color: #fff;
 }
-
-.btn-light:hover {
-  background-color: transparent;
-  border-color: transparent;
-}
-
 .icon-wrapper {
   color: #fff;
 }
-
 button .icon-wrapper:hover {
   color: blue;
 }
-
-.like-count {
-  color: #fff;
-}
-
 .swiper-wrapper {
   transition-timing-function: linear;
 }
@@ -189,11 +150,9 @@ button .icon-wrapper:hover {
 .mobile {
   display: none;
 }
-
 @media (max-width: 767px) {
   .event-card {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
   .event-card-description {
     font-size: 14px;
