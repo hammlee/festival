@@ -1,12 +1,13 @@
 /** @format */
 const targetDate = new Date("2023-05-28T23:59:59");
 
+const TIME_FORMATS = [24, 60, 60, 1000];
+
 const updateCountdown = () => {
   const timeDiff = targetDate - new Date();
-  const timeFormats = [24, 60, 60, 1000];
 
   let tempTime = timeDiff;
-  const timeParts = timeFormats.map((time) => {
+  const timeParts = TIME_FORMATS.map((time) => {
     tempTime = tempTime / time;
     return Math.floor(tempTime % time);
   });
@@ -14,6 +15,7 @@ const updateCountdown = () => {
   const [days, hours, minutes, seconds] = timeParts.reverse();
   $("#countdown").html(`(${days}일 ${hours}시간 ${minutes}분 ${seconds}초 ⏰)`);
 };
+
 setInterval(updateCountdown, 1000);
 
 const isMobileDevice = () => window.innerWidth < 600;
@@ -73,12 +75,15 @@ function updateCards(data) {
 }
 
 function updateCard(data, target, hasRank = false) {
-  let [rank, previousLikeCount, count] = [1, -1, 0];
+  let rank = 1;
+  let previousLikeCount = -1;
+  let count = 0;
 
-  data.forEach((item) => {
+  for (const item of data) {
     if (hasRank) {
-      if (item.likeCount === previousLikeCount) count++;
-      else {
+      if (item.likeCount === previousLikeCount) {
+        count++;
+      } else {
         rank += count;
         count = 1;
       }
@@ -89,14 +94,15 @@ function updateCard(data, target, hasRank = false) {
     const card = createCardTemplate(item, cardText, hasRank ? rank : null);
 
     $(target).append(card);
-  });
+  }
 }
 
 function createCardTemplate(item, cardText, rank) {
+  const rankHtml = rank ? `<div class="card-rank">${rank}</div>` : "";
   return `<div class="swiper-slide">
   <div class="card card-black">
     <div class="card-badge">${item.id}</div>
-    ${rank ? `<div class="card-rank">${rank}</div>` : ""}
+    ${rankHtml}
     <div class="card-body">
       <p class="card-text">${cardText}</p>
     </div>
@@ -107,9 +113,7 @@ function createCardTemplate(item, cardText, rank) {
         </span>
         <span class="like-count">${item.likeCount}</span>
       </div>
-      <h5 class="card-name">from <span class="card-name-from">${
-        item.name
-      }</span></h5>
+      <h5 class="card-name">from <span class="card-name-from">${item.name}</span></h5>
     </div>
   </div>
 </div>`;
